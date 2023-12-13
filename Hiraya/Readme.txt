@@ -1,6 +1,5 @@
 Thanks for downloading this template!
 
-Template Name: Arsha
-Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+Template Name: Hiraya Bookings Webpage
+Author: Arabela Matias
+Year: 2023
