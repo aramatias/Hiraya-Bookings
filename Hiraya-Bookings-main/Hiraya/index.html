@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Hiraya Booking</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/letter.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Header -->
+
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <a href="index.html" class="logo me-auto"
+          ><img src="assets/img/hiraya.png" alt="" class="img-fluid"
+        /></a>
+
+        <!-- Navigation bar -->
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link collapsed" href="#faq">FAQs</a></li>
+            <li>
+              <a class="getstarted scrollto" href="admin-register.html"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+
+        <!-- Navgation bar -->
+      </div>
+    </header>
+    <!------------------------------------- 
+    End Header
+
+    -----------------------------------
+   
+    Hero/Header Section 
+    ------------------------------------->
+    <section id="hero" class="hero">
+      <img src="assets/img/H1.png" alt="" data-aos="fade-in" />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10">
+            <h1 data-aos="fade-up" data-aos-delay="100">
+              Your Dreams, <br />
+              Our Stage.
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="200">
+              Over 3,000 Bookings and countless stories unfolded.
+            </p>
+
+            <!-- Availability Form -->
+
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div
+                  class="availability-form"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <!-- <p>Select Date:</p> -->
+                  <input type="date" id="date" name="date" placeholder="Date" />
+                  <input type="time" id="time" name="time" />
+                  <button id="checkAvailability">Check Availability</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="availabilityResult" class="availability-result">
+              <!-- Availability result will be displayed here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!------------------------------------- 
+    End of Hero/Header
+
+    -----------------------------------
+   
+    Main Sections
+    ------------------------------------->
+
+    <main id="main">
+      <!-- Clients/Sponsors -->
+      <section id="clients" class="clients section-bg">
+        <div class="container">
+          <div
+            class="row justify-content-center align-items-center"
+            data-aos="zoom-in"
+          >
+            <div
+              class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+            >
+              <img src="assets/img/LSG.png" class="img-fluid" alt="" />
+            </div>
+
+            <div
+              class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+            >
+              <img src="assets/img/CSU.png" class="img-fluid" alt="" />
+            </div>
+
+            <div
+              class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+            >
+              <img src="assets/img/CCIS.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!------------------------------------- 
+    End Clients/Sponsor
+
+    -----------------------------------
+   
+    Main About
+    ------------------------------------->
+
+      <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div class="col-lg-5 order-1 order-lg-1">
+              <div class="image">
+                <img src="assets/img/Why.gif" alt="Image Description" />
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-2"
+            >
+              <div class="content">
+                <p>
+                  <strong>Hiraya Auditorium</strong> is where dreams take center
+                  stage. We offer a seamless platform for events, performances,
+                  and gatherings, with over 3,000 bookings and counting. Our
+                  mission is to transform aspirations into memorable
+                  experiences, ensuring each reservation becomes an
+                  unforgettable journey. At Hiraya, your dream event starts
+                  here—welcome to your stage.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!------------------------------------- 
+    End of Main About
+
+    -----------------------------------
+   
+    Call to Action 
+    ------------------------------------->
+
+      <section id="call-to-action" class="call-to-action">
+        <img src="assets/img/H2.png" alt="" />
+
+        <div class="container">
+          <div
+            class="row justify-content-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <div class="col-xl-10">
+              <div class="text-center">
+                <h3>Book your dream event now!</h3>
+                <br />
+                <a class="cta-btn" href="#hero">Book Now!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!------------------------------------- 
+    End of Call to Action
+
+    -----------------------------------
+   
+    About #2
+    ------------------------------------->
+
+      <section id="abouttwo" class="abouttwo">
+        <div class="container" data-aos="fade-up">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1">
+              <div class="content">
+                <p class="text-justify">
+                  Elevating your booking experience beyond the desktop, our
+                  mobile application brings Hiraya Booking to the palm of your
+                  hand. Seamlessly navigate our platform, explore event spaces,
+                  and make reservations anytime, anywhere. With our
+                  user-friendly app, access real-time availability, customize
+                  bookings, and manage your events with ease while on-the-go.
+                  Transform your vision into reality, right from your mobile
+                  device. Download the Hiraya Booking app today and unlock a
+                  world of possibilities at your fingertips.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2">
+              <div class="image text-center">
+                <img
+                  src="assets/img/iraya.gif"
+                  alt="GIF Image Description"
+                  class="img-fluid"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!------------------------------------- 
+    End of About #2
+
+    -----------------------------------
+   
+    FAQs Section
+    ------------------------------------->
+      <section id="faq" class="faq section-bg">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>
+              Explore commonly asked questions about booking, event types,
+              services, and support in our FAQs section. Get quick answers to
+              ensure a smooth and informed booking experience at Hiraya
+              Auditorium, Caraga State University's premier event space.
+            </p>
+          </div>
+
+          <div class="faq-list">
+            <ul>
+              <li data-aos="fade-up">
+                <a
+                  data-bs-toggle="collapse"
+                  class="collapse"
+                  data-bs-target="#faq-list-1"
+                  >How do I make a booking with Hiraya Booking?
+                  <i class="bx bx-chevron-down icon-show"></i
+                  ><i class="bx bx-chevron-up icon-close"></i
+                ></a>
+                <div
+                  id="faq-list-1"
+                  class="collapse show"
+                  data-bs-parent=".faq-list"
+                >
+                  <p>
+                    To make a booking, visit our website or mobile app, select
+                    your preferred date and space, fill in event details, and
+                    proceed with the reservation process.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up">
+                <a
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-list-2"
+                  class="collapsed"
+                  >Can I modify or cancel my booking?
+                  <i class="bx bx-chevron-down icon-show"></i
+                  ><i class="bx bx-chevron-up icon-close"></i
+                ></a>
+                <div
+                  id="faq-list-2"
+                  class="collapse"
+                  data-bs-parent=".faq-list"
+                >
+                  <p>
+                    Yes, modifications or cancellations are possible. Please
+                    refer to our booking policy for details on terms and
+                    conditions.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up">
+                <a
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-list-3"
+                  class="collapsed"
+                >
+                  What types of events can I host at Hiraya?
+                  <i class="bx bx-chevron-down icon-show"></i
+                  ><i class="bx bx-chevron-up icon-close"></i
+                ></a>
+                <div
+                  id="faq-list-3"
+                  class="collapse"
+                  data-bs-parent=".faq-list"
+                >
+                  <p>
+                    Hiraya accommodates various events, including conferences,
+                    performances, workshops, celebrations, and more. Our spaces
+                    cater to diverse event needs.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up">
+                <a
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-list-4"
+                  class="collapsed"
+                  >Is technical equipment available at Hiraya for events?<i
+                    class="bx bx-chevron-down icon-show"
+                  ></i
+                  ><i class="bx bx-chevron-up icon-close"></i
+                ></a>
+                <div
+                  id="faq-list-4"
+                  class="collapse"
+                  data-bs-parent=".faq-list"
+                >
+                  <p>
+                    Yes, we offer technical equipment such as projectors,
+                    microphones, and sound systems. These can be selected as
+                    add-ons during the booking process.
+                  </p>
+                </div>
+              </li>
+
+              <li data-aos="fade-up">
+                <a
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-list-5"
+                  class="collapsed"
+                >
+                  How far in advance should I book my event?
+                  <i class="bx bx-chevron-down icon-show"></i
+                  ><i class="bx bx-chevron-up icon-close"></i
+                ></a>
+                <div
+                  id="faq-list-5"
+                  class="collapse"
+                  data-bs-parent=".faq-list"
+                >
+                  <p>
+                    It's recommended to book as early as possible to secure your
+                    preferred date and space. However, last-minute bookings are
+                    also accommodated based on availability.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!------------------------------------- 
+    End of FAQs
+    ------------------------------------->
+    </main>
+    <!------------------------------------- 
+    End of Main
+
+    -----------------------------------
+   
+    Footer Section
+    ------------------------------------->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5 col-md-8">
+              <div class="logo-container">
+                <img
+                  src="assets/img/hiraya.png"
+                  alt="Company Logo"
+                  class="logo"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links narrow-container">
+              <h4>Address</h4>
+              <p class="text-justify">
+                Hiraya Auditorium, Hiraya Building, Caraga State University,
+                Butuan City, 8600, Agusan del Norte, Philippines.
+              </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links narrow-container">
+              <h4>Contact</h4>
+              <p class="text-justify">
+                hiraya.bookings@carsu.edu.ph<br />+639123456789<br />(02)
+                8-779-5151
+              </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links narrow-container">
+              <h4>Social Media</h4>
+              <div class="social-links mt-3">
+                <a
+                  href="https://www.facebook.com/arabelamaematias"
+                  class="facebook"
+                  target="_blank"
+                  ><i class="bx bxl-facebook"></i
+                ></a>
+                <a
+                  href="https://www.instagram.com/araaayooo/"
+                  class="instagram"
+                  target="_blank"
+                  ><i class="bx bxl-instagram"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-bottom clearfix">
+        <div class="copyright text-center">
+          &copy; <strong><span>Hiraya Booking</span></strong
+          >. All Rights Reserved
+        </div>
+      </div>
+    </footer>
+
+    <!------------------------------------- 
+    End of Footer
+
+    -----------------------------------
+   
+    Preloader
+    ------------------------------------->
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <script>
+      document
+        .getElementById("checkAvailability")
+        .addEventListener("click", function () {
+          const selectedDate = document.getElementById("date").value;
+          const selectedTime = document.getElementById("time").value;
+
+          const availabilityResult =
+            document.getElementById("availabilityResult");
+          availabilityResult.innerHTML = `<p>Availability for ${selectedDate} at ${selectedTime} is being checked...</p>`;
+        });
+    </script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
