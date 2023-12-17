@@ -1137,3 +1137,122 @@ body {
   color: #000000; /* Change the text color on hover */
   border-color:  #7B685D;
 }
+
+
+.form-select {
+  font-size: 12px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #7B685D;
+  border-radius: 5px;
+  appearance: none; /* Hides default arrow icon on some browsers */
+  background: #fff url('data:image/svg+xml;utf8,<svg fill="%23343a40" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
+  background-size: 12px;
+}
+
+
+.card-title {
+  color: #E57226; /* Change color to your preference */
+  font-weight: bold; /* Change weight to your preference */
+  font-size: 24px; /* Change size to your preference */
+}
+
+/* Change the font color, weight, and size for the review details */
+.review-details {
+  color: #000000; /* Change color to your preference */
+  font-weight: normal; /* Change weight to your preference */
+  font-size: 16px; /* Change size to your preference */
+}
+
+/* CSS code to modify font color, weight, and size */
+.review-details h6 {
+  color: rgb(0, 0, 0); /* Change color as needed */
+  font-weight: bold; /* Change font weight as needed */
+  font-size: 16px; /* Change font size as needed */
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.review-details p {
+  color: #2A2A2A; /* Change color as needed */
+  font-weight: normal; /* Change font weight as needed */
+  font-size: 14px; /* Change font size as needed */
+  margin: 0;
+}
+
+.btn-secondary {
+  background-color: #ffffff; /* Change the background color */
+  color: #E57226; /* Change the text color */
+  border-color: #E57226;
+}
+
+.btn-secondary:hover {
+  background-color: #7B685D; /* Change the hover background color */
+  color: #000000; /* Change the text color on hover */
+  border-color:  #7B685D;
+}
+
+
+          
+          .receipt-header {
+            margin-bottom: 20px;
+          }
+
+          .receipt-header h2 {
+            margin: 5px 0;
+          }
+
+          .receipt-info {
+            text-align: left;
+            margin-bottom: 20px;
+          }
+
+          .receipt-info p {
+            margin: 5px 0;
+          }
+
+          .receipt-details {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+            margin-bottom: 20px;
+          }
+
+          .receipt-details p {
+            margin: 5px 0;
+          }
+
+          .total {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+          }
+
+          .download-button {
+            font-size: 10px;
+            margin-top: 30px;
+            text-align: center;
+          }
+
+          .modal-content {
+            background-color: #ffffff; /* Background color */
+            border-color: #7B685D;
+            border-radius: 8px; /* Round corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+          }
+          
+          .modal-body p {
+            margin-top: 10px;
+            margin-bottom: 10px; /* Remove default bottom margin for paragraphs */
+          }
+
+          .btn-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #000000; /* Close button color */
+            opacity: 0.5; /* Button opacity */
+          }
+          

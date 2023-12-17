@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Hiraya Booking - Confirmation</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/letter.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <section
+          class="section review-info min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+        >
+          <div class="container">
+            <div class="row justify-content-center">
+              <div
+                class="col-lg-8 col-md-10 d-flex flex-column align-items-center justify-content-center"
+              >
+                <div class="d-flex justify-content-center py-4">
+                  <a
+                    href="index.html"
+                    class="logo d-flex align-items-center w-auto"
+                  >
+                    <img src="assets/img/hiraya.png" alt="" />
+                  </a>
+                </div>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="pt-4 pb-2">
+                      <h5 class="card-title text-center pb-0 fs-4">
+                        Booking details
+                      </h5>
+
+                      <p class="text-center small">
+                        Please review and confirm your details.
+                      </p>
+                    </div>
+                    <div class="review-details">
+                      <!-- Schedule -->
+                      <div class="info-section">
+                        <h6>Schedule</h6>
+                        <p>December 22, 2023</p>
+                        <p>8:00 am to 8:00 pm</p>
+                      </div>
+
+                      <!-- Personal Information -->
+                      <div class="info-section">
+                        <h6>Personal Information</h6>
+                        <p>Arabela Matias</p>
+                        <p>09635757697</p>
+                        <p>arabelamaematias@gmail.com</p>
+                      </div>
+
+                      <!-- Purpose of Reservation -->
+                      <div class="info-section">
+                        <h6>Purpose of Reservation</h6>
+                        <p>CCIS College Days</p>
+                      </div>
+
+                      <!-- Affiliation -->
+                      <div class="info-section">
+                        <h6>Affiliation</h6>
+                        <p>Student from Caraga State University</p>
+                      </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="col-12 mt-3 d-flex justify-content-between">
+                      <a href="client-form.html" class="btn btn-secondary">
+                        Previous
+                      </a>
+                      <button class="btn btn-primary" id="proceedToReceipt">
+                        <a href="client-receipt.html"> Next </a>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- End #main -->
+
+    <footer>
+      <hr />
+      <div class="container footer-bottom clearfix">
+        <div class="copyright text-center">
+          &copy; <strong><span>Hiraya Booking</span></strong
+          >. All Rights Reserved
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("form.needs-validation").submit(function (event) {
+          event.preventDefault(); // Prevent default form submission
+          var formData = $(this).serializeArray(); // Get form data
+
+          // Prepare review content
+          var reviewContent = "";
+          formData.forEach(function (field) {
+            reviewContent +=
+              "<p><strong>" + field.name + ":</strong> " + field.value + "</p>";
+          });
+
+          // Display review content
+          $("#reviewContent").html(reviewContent);
+
+          // Show review section and hide form section
+          $(".clientform").hide();
+          $(".review-info").show();
+        });
+
+        // Handle "Next" button click to proceed to e-receipt
+        $("#proceedToReceipt").click(function () {
+          window.location.href = "e-receipt.html"; // Replace with your e-receipt URL
+        });
+      });
+    </script>
+
+    <script>
+      document
+        .getElementById("backToHome")
+        .addEventListener("click", function () {
+          window.location.href = "client-receipt.html"; // Navigate to index.html
+          // Trigger modal display in index.html using the modal's ID
+          window.onload = function () {
+            var myModal = new bootstrap.Modal(
+              document.getElementById("successModal")
+            );
+            myModal.show();
+          };
+        });
+    </script>
+  </body>
+</html>
