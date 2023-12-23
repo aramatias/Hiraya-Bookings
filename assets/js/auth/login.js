@@ -1,4 +1,4 @@
-const backendURL = "https://hiraya-audi-booking-backend.test";
+import { backendURL } from "../utils/utils.js";
 
 // Form Login
 const form_login = document.getElementById("form_login");
@@ -29,22 +29,21 @@ form_login.onsubmit = async (e) => {
 
   // Get response if 200-299 status code
   if (response.ok) {
-    const json = await response.json();
+    const data = await response.json();
 
-    console.log(json);
+    console.log(data);
     // Store Token
-    localStorage.setItem("token", json.token);
+    localStorage.setItem("token", data.token);
 
     form_login.reset();
 
     // Change the message of the toast before showing it
     toastEl.querySelector(".toast-body").textContent =
-      `Welcome back` + json.username;
+      `Welcome back` + data.username;
     toast.show();
 
     // Redirect Page
-    window.location.pathname =
-      "/Hiraya-Bookings-main/Hiraya/admin-interface.html";
+    window.location.pathname = "/admin-interface.html";
   }
   // Get response if 422 status code
   else if (response.status == 422) {
