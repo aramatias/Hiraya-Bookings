@@ -50,6 +50,14 @@ form_register.onsubmit = async (e) => {
     toast.show();
 
     console.log(json);
+  } else if (response.status == 401) {
+    const json = await response.json();
+
+    // Change the message of the toast before showing it
+    toastEl.querySelector(".toast-body").textContent = json.message;
+    toast.show();
+
+    console.log(json);
   }
 
   document.querySelector("#form_register button").disabled = false;

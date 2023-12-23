@@ -35,7 +35,6 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style1.css" rel="stylesheet" />
-    <script type="module" src="assets/js/utils/utils.js"></script>
   </head>
 
   <body>
@@ -56,17 +55,14 @@
               class="nav-link nav-profile d-flex align-items-center pe-0"
               href="#"
               data-bs-toggle="dropdown"
+              id="user_logged"
             >
-              <img src="assets/img/matias.jpg" alt="a" class="rounded-circle" />
-              <span class="d-none d-md-block dropdown-toggle ps-2"
-                >Ara Matias</span
-              >
             </a>
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
               <li class="dropdown-header">
-                <h6>Ara Matias</h6>
+                <h6><span id="user_email">Ara Matias</span></h6>
                 <span>Admin</span>
               </li>
               <li>
@@ -102,7 +98,8 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="index.html"
+                  href="#"
+                  id="btn_logout"
                 >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
@@ -435,6 +432,6 @@
     <script src="assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/admin.js"></script>
+    <script type="module" src="assets/js/admin.js"></script>
   </body>
 </html>
