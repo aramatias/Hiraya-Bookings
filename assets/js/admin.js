@@ -1,7 +1,10 @@
-import { backendURL, getLoggedUser } from "./utils/utils.js";
+import { backendURL, getLoggedUser, getUserDetails } from "./utils/utils.js";
 
 // Get Logged User Profile
 getLoggedUser();
+
+// Get User Details
+getUserDetails();
 
 // Logout Btn
 const btn_logout = document.getElementById("btn_logout");

@@ -63,7 +63,7 @@
             >
               <li class="dropdown-header">
                 <h6><span id="user_email"></span></h6>
-                <span>Admin</span>
+                <span id="user_role">Admin</span>
               </li>
               <li>
                 <hr class="dropdown-divider" />
@@ -98,7 +98,8 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="index.html"
+                  href="#"
+                  id="btn_logout"
                 >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
@@ -123,6 +124,15 @@
           </a>
         </li>
         <!-- END OF DASHBOARD NAV -->
+
+        <!-- BOOKINGS NAV -->
+        <li class="nav-item">
+          <a class="nav-link" href="admin-bookings.html">
+            <i class="bi bi-clock"></i>
+            <span>Bookings</span>
+          </a>
+        </li>
+        <!-- End of Bookings NAV -->
 
         <!-- STATISTICS NAV -->
         <li class="nav-item">
@@ -236,7 +246,7 @@
                       data-bs-toggle="tab"
                       data-bs-target="#profile-change-password"
                     >
-                      Change Password
+                      Change Pass
                     </button>
                   </li>
                 </ul>
@@ -246,54 +256,43 @@
                     id="profile-overview"
                   >
                     <h5 class="card-title">About</h5>
-                    <p class="small fst-italic">
-                      Sunt est soluta temporibus accusantium neque nam maiores
-                      cumque temporibus. Tempora libero non est unde veniam est
-                      qui dolor. Ut sunt iure rerum quae quisquam autem eveniet
-                      perspiciatis odit. Fuga sequi sed ea saepe at unde.
-                    </p>
+                    <p class="small fst-italic" id="about"></p>
 
                     <h5 class="card-title">Profile Details</h5>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Full Name</div>
-                      <div class="col-lg-9 col-md-8">Arabela Mae Matias</div>
+                      <div class="col-lg-9 col-md-8" id="user_name"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Company</div>
-                      <div class="col-lg-9 col-md-8">
-                        Lueilwitz, Wisoky and Leuschke
-                      </div>
+                      <div class="col-lg-9 col-md-8" id="company"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Job</div>
-                      <div class="col-lg-9 col-md-8">Web Designer</div>
+                      <div class="col-lg-9 col-md-8" id="job"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Country</div>
-                      <div class="col-lg-9 col-md-8">USA</div>
+                      <div class="col-lg-9 col-md-8" id="country"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Address</div>
-                      <div class="col-lg-9 col-md-8">
-                        A108 Adam Street, New York, NY 535022
-                      </div>
+                      <div class="col-lg-9 col-md-8" id="address"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Phone</div>
-                      <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                      <div class="col-lg-9 col-md-8" id="phone"></div>
                     </div>
 
                     <div class="row">
                       <div class="col-lg-3 col-md-4 label">Email</div>
-                      <div class="col-lg-9 col-md-8">
-                        k.anderson@example.com
-                      </div>
+                      <div class="col-lg-9 col-md-8" id="email"></div>
                     </div>
                   </div>
 
@@ -310,7 +309,7 @@
                           >Profile Image</label
                         >
                         <div class="col-md-8 col-lg-9">
-                          <img src="assets/img/matias.jpg" alt="Profile" />
+                          <div id="profileImage"></div>
                           <div class="pt-2">
                             <a
                               href="#"
@@ -340,7 +339,6 @@
                             type="text"
                             class="form-control"
                             id="fullName"
-                            value="Kevin Anderson"
                           />
                         </div>
                       </div>
@@ -357,9 +355,7 @@
                             class="form-control"
                             id="about"
                             style="height: 100px"
-                          >
-Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea
-                          >
+                          ></textarea>
                         </div>
                       </div>
 
@@ -375,7 +371,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="text"
                             class="form-control"
                             id="company"
-                            value="Lueilwitz, Wisoky and Leuschke"
                           />
                         </div>
                       </div>
@@ -392,7 +387,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="text"
                             class="form-control"
                             id="Job"
-                            value="Web Designer"
                           />
                         </div>
                       </div>
@@ -409,7 +403,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="text"
                             class="form-control"
                             id="Country"
-                            value="USA"
                           />
                         </div>
                       </div>
@@ -426,7 +419,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="text"
                             class="form-control"
                             id="Address"
-                            value="A108 Adam Street, New York, NY 535022"
                           />
                         </div>
                       </div>
@@ -443,7 +435,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="text"
                             class="form-control"
                             id="Phone"
-                            value="(436) 486-3538 x29071"
                           />
                         </div>
                       </div>
@@ -460,7 +451,6 @@ Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Temp
                             type="email"
                             class="form-control"
                             id="Email"
-                            value="k.anderson@example.com"
                           />
                         </div>
                       </div>

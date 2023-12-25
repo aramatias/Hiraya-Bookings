@@ -3,8 +3,7 @@ function setRouter() {
     case "/admin-login.html":
     case "/admin-register.html":
       if (localStorage.getItem("token")) {
-        window.location.pathname =
-          "/Hiraya-Bookings-main/Hiraya/admin-interface.html";
+        window.location.pathname = "/admin-interface.html";
       }
       break;
 
