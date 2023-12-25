@@ -1,3 +1,82 @@
+import { backendURL } from "./utils/utils.js";
+
+const apiUrl = backendURL + "/api/booking";
+
+async function checkAvailability() {
+  // Toast Initialization
+  var toastEl = document.getElementById("liveToast");
+  var toast = new bootstrap.Toast(toastEl);
+  // Get the date and time from the input fields
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+
+  // Fetch bookings from the database
+  const response = await fetch(apiUrl);
+  const bookings = await response.json();
+
+  const selectedDateTime = new Date(`${date}T${time}`);
+
+  const bufferTime = 30 * 60 * 1000;
+
+  const endOfDay = new Date(selectedDateTime);
+  endOfDay.setHours(23, 59, 59, 999);
+
+  const bookingsForSelectedDate = bookings.filter(
+    (booking) => booking.date === date
+  );
+
+  const isAvailable = bookings.every((booking) => {
+    const bookingDateTime = new Date(`${booking.date}T${booking.time}`);
+    const startTime = bookingDateTime.getTime() - bufferTime;
+    const endTime = endOfDay.getTime();
+
+    return (
+      selectedDateTime.getTime() < startTime ||
+      selectedDateTime.getTime() > endTime
+    );
+  });
+
+  if (isAvailable || bookingsForSelectedDate.length === 0) {
+    toastEl.querySelector(
+      ".toast-body"
+    ).textContent = `The selected date and time are available!`;
+    toastEl.querySelector(
+      "#toastToAction"
+    ).innerHTML = `<a href="client-form.html" class="btn btn-primary btn-sm">
+    Book Now!
+  </a>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm"
+    data-bs-dismiss="toast"
+  >
+    Close
+  </button>`;
+    toast.show();
+  } else {
+    toastEl.querySelector(".toast-body").textContent =
+      "Sorry, the selected date and time are not available.";
+    toastEl.querySelector("#toastToAction").innerHTML = `
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm"
+    data-bs-dismiss="toast"
+  >
+    Close
+  </button>`;
+    toast.show();
+  }
+  // Display the availability result
+  // const availabilityResult = document.getElementById("availabilityResult");
+  // availabilityResult.innerHTML = isAvailable
+  //   ? `The selected date and time are available! <a href="client-form.html" class="text-info">Book Now!</a>`
+  //   : "Sorry, the selected date and time are not available.";
+}
+
+// Attach the function to the button click event
+const checkAvailabilityButton = document.getElementById("checkAvailability");
+checkAvailabilityButton.addEventListener("click", checkAvailability);
+
 (function () {
   "use strict";
 

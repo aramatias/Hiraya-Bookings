@@ -41,7 +41,11 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a
+          title="Hiraya Booking"
+          href="index.html"
+          class="logo d-flex align-items-center"
+        >
           <img src="assets/img/hiraya.png" alt="" />
         </a>
       </div>
@@ -52,6 +56,7 @@
         <ul class="d-flex align-items-center">
           <li class="nav-item dropdown pe-3">
             <a
+              title="Hiraya Booking - Admin"
               class="nav-link nav-profile d-flex align-items-center pe-0"
               href="#"
               id="user_logged"
@@ -213,6 +218,44 @@
         </div>
       </section>
 
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Modal title
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ======= Footer ======= -->
       <footer>
         <hr />
@@ -228,6 +271,7 @@
     <!-- End #main -->
 
     <a
+      title="Hiraya Booking"
       href="#"
       class="back-to-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i

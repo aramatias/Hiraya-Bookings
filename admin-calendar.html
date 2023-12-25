@@ -233,6 +233,7 @@
 
     <!-- Template Main JS File -->
     <script type="module" src="assets/js/admin.js"></script>
+    <script type="module" src="assets/js/pages/calendar.js"></script>
 
     <!-- Calendar Script  -->
     <script>
@@ -262,12 +263,11 @@
 
       // Event creation function
       const events = [];
-      function createEvent(startDate, title, endDate) {
+      function createEvent(id, startDate, title) {
         const event = {
-          id: 1, // You must use a custom id generator
+          id: id, // You must use a custom id generator
           title: title,
           start: startDate,
-          allDay: endDate ? false : true, // If there's no end date, the event will be all day of start date
         };
         events.push(event);
       }

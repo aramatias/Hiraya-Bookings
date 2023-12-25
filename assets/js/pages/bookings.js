@@ -1,5 +1,10 @@
 import { backendURL } from "../utils/utils.js";
 
+/**
+ * Retrieves the list of bookings from the backend API.
+ *
+ * @return {Promise<void>} Returns a Promise that resolves once the bookings are retrieved.
+ */
 async function getBookingsLists() {
   const response = await fetch(backendURL + "/api/booking", {
     headers: {
@@ -17,9 +22,17 @@ async function getBookingsLists() {
       bookingDiv.className =
         "list-group-item d-flex justify-content-between align-items-center";
       bookingDiv.innerHTML = `<div class="ms-2 me-auto">
-      <div class="fw-bold ">${getWeekday(booking.date)} | ${booking.date}</div>
-      ${booking.client_id}, Purpose: ${booking.purpose} 
-    </div><a href="#" class="btn btn-light">View</a>`;
+      <div>${getWeekday(booking.date)} | ${booking.date}</div>
+      Purpose: ${booking.purpose} 
+      </div>
+      <button 
+        type="button" 
+        class="btn btn-primary" 
+        data-bs-toggle="modal" 
+        data-bs-target="#staticBackdrop"
+        id: "view_booking_${booking.id}">
+      View
+      </button>`;
 
       if (booking.status === "pending") {
         document.getElementById("pendingBookings").appendChild(bookingDiv);
@@ -51,4 +64,15 @@ function getWeekday(dateString) {
   const date = new Date(dateString);
   const dayName = days[date.getDay()];
   return dayName;
+}
+
+/**
+ * Displays the booking details as a modal.
+ *
+ * @param {Object} booking - The booking object containing the details.
+ */
+function displayBookingDetailsModal(booking) {
+  // Code to create and display the modal
+  // You can use the booking object to populate the modal with the necessary information
+  console.log(booking + "running");
 }
