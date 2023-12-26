@@ -31,7 +31,7 @@ form_login.onsubmit = async (e) => {
   if (response.ok) {
     const data = await response.json();
 
-    console.log(data);
+    console.log(data.user.username);
     // Store Token
     localStorage.setItem("token", data.token);
 
@@ -39,7 +39,7 @@ form_login.onsubmit = async (e) => {
 
     // Change the message of the toast before showing it
     toastEl.querySelector(".toast-body").textContent =
-      `Welcome back` + data.username;
+      `Welcome back ` + data.user.username;
     toast.show();
 
     // Redirect Page
