@@ -11,7 +11,12 @@ async function checkAvailability() {
   const time = document.getElementById("time").value;
 
   // Fetch bookings from the database
-  const response = await fetch(apiUrl);
+  const response = await fetch(apiUrl, {
+    headers: {
+      Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
+    },
+  });
   const bookings = await response.json();
 
   const selectedDateTime = new Date(`${date}T${time}`);
