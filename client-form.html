@@ -57,6 +57,23 @@
                   </a>
                 </div>
 
+                <!-- Toasts Starts Here -->
+                <div class="toast-container position-fixed top-0 end-0 p-3">
+                  <div
+                    id="liveToast"
+                    class="toast"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                  >
+                    <div class="toast-body">
+                      Hello, world! This is a toast message.
+                    </div>
+                    <div class="p-2 border-top" id="toastToAction"></div>
+                  </div>
+                </div>
+                <!--  -->
+
                 <div class="card mb-3">
                   <div class="card-body">
                     <div class="pt-2 pb-2">
@@ -67,148 +84,188 @@
                         Please provide the necessary information for booking.
                       </p>
                     </div>
-                    <form class="row g-3 needs-validation" novalidate>
-                      <form class="row g-3 needs-validation" novalidate>
-                        <div class="col-12">
-                          <label for="first_name" class="form-label"
-                            >First Name</label
-                          >
-                          <input
-                            type="text"
-                            name="first_name"
-                            class="form-control"
-                            id="first_name"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please enter your first name!
-                          </div>
-                        </div>
 
-                        <div class="col-12">
-                          <label for="lastName" class="form-label"
-                            >Last Name</label
-                          >
-                          <input
-                            type="text"
-                            name="lastName"
-                            class="form-control"
-                            id="lastName"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please enter your last name!
-                          </div>
+                    <form
+                      class="row g-3 needs-validation"
+                      id="form_bookings"
+                      novalidate
+                    >
+                      <div class="col-12">
+                        <label for="first_name" class="form-label"
+                          >First Name</label
+                        >
+                        <input
+                          type="text"
+                          name="first_name"
+                          class="form-control"
+                          id="first_name"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please enter your first name!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="contactNumber" class="form-label"
-                            >Contact Number</label
-                          >
-                          <input
-                            type="tel"
-                            name="contactNumber"
-                            class="form-control"
-                            id="contactNumber"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please enter your contact number!
-                          </div>
+                      <div class="col-12">
+                        <label for="last_name" class="form-label"
+                          >Last Name</label
+                        >
+                        <input
+                          type="text"
+                          name="last_name"
+                          class="form-control"
+                          id="last_name"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please enter your last name!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="email" class="form-label">Email</label>
-                          <input
-                            type="email"
-                            name="email"
-                            class="form-control"
-                            id="email"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please enter a valid email address!
-                          </div>
+                      <div class="col-12">
+                        <label for="contact_number" class="form-label"
+                          >Contact Number</label
+                        >
+                        <input
+                          type="tel"
+                          name="contact_number"
+                          class="form-control"
+                          id="contact_number"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please enter your contact number!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="date" class="form-label">Date</label>
-                          <input
-                            type="date"
-                            name="date"
-                            class="form-control"
-                            id="date"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please select the date!
-                          </div>
+                      <div class="col-12">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          id="email"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please enter a valid email address!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="time" class="form-label">Time</label>
-                          <input
-                            type="time"
-                            name="time"
-                            class="form-control"
-                            id="time"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please select the date!
-                          </div>
+                      <div class="col-12">
+                        <label for="date" class="form-label">Date</label>
+                        <input
+                          type="date"
+                          name="date"
+                          class="form-control"
+                          id="date"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please select the date!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="purpose" class="form-label"
-                            >Purpose of Reservation</label
-                          >
-                          <input
-                            type="text"
-                            name="purpose"
-                            class="form-control"
-                            id="purpose"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please state the purpose of your reservation!
-                          </div>
+                      <div class="col-12">
+                        <label for="time" class="form-label">Time</label>
+                        <input
+                          type="time"
+                          name="time"
+                          class="form-control"
+                          id="time"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please select the date!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <label for="affiliation" class="form-label"
-                            >Select Affiliation</label
-                          >
-                          <select
-                            name="affiliation"
-                            class="form-select"
-                            id="affiliation"
-                            required
-                          >
-                            <option value="" selected disabled>
-                              Select Affiliation
-                            </option>
-                            <option value="student-csu">
-                              Student from Caraga State University
-                            </option>
-                            <option value="faculty-csu">
-                              Faculty/Staff from Caraga State University
-                            </option>
-                            <option value="non-csu">Non-CSU Affiliated</option>
-                          </select>
-                          <div class="invalid-feedback">
-                            Please select your affiliation!
-                          </div>
+                      <div class="col-12">
+                        <label for="purpose" class="form-label"
+                          >Purpose of Reservation</label
+                        >
+                        <input
+                          type="text"
+                          name="purpose"
+                          class="form-control"
+                          id="purpose"
+                          required
+                        />
+                        <div class="invalid-feedback">
+                          Please state the purpose of your reservation!
                         </div>
+                      </div>
 
-                        <div class="col-12">
-                          <a
-                            href="client-confirmation.html"
-                            class="btn btn-primary w-100"
-                            >Confirm</a
-                          >
+                      <div class="col-12 d-none">
+                        <label for="status" class="form-label"
+                          >Purpose of Reservation</label
+                        >
+                        <input
+                          type="text"
+                          name="status"
+                          class="form-control"
+                          id="status"
+                          value="pending"
+                        />
+                      </div>
+
+                      <div class="col-12 d-none">
+                        <label for="user_id" class="form-label"
+                          >Purpose of Reservation</label
+                        >
+                        <input
+                          type="text"
+                          name="user_id"
+                          class="form-control"
+                          id="user_id"
+                          value="1"
+                        />
+                      </div>
+
+                      <div class="col-12 d-none">
+                        <label for="client_id" class="form-label"
+                          >Purpose of Reservation</label
+                        >
+                        <input
+                          type="text"
+                          name="client_id"
+                          class="form-control"
+                          id="client_id"
+                          value="1"
+                        />
+                      </div>
+
+                      <div class="col-12">
+                        <label for="affiliation" class="form-label"
+                          >Select Affiliation</label
+                        >
+                        <select
+                          name="affiliation_id"
+                          class="form-select"
+                          id="affiliation"
+                          required
+                        >
+                          <option value="" selected disabled>
+                            Select Affiliation
+                          </option>
+                          <option value="1">
+                            Student from Caraga State University
+                          </option>
+                          <option value="3">
+                            Faculty/Staff from Caraga State University
+                          </option>
+                          <option value="4">Non-CSU Affiliated</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select your affiliation!
                         </div>
-                      </form>
+                      </div>
+
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary w-100">
+                          Confirm
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -247,7 +304,7 @@
     <script src="assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
     <script type="module" src="assets/js/pages/client-form.js"></script>
   </body>
 </html>

@@ -69,10 +69,13 @@ async function getBookingsLists() {
             // Update the UI to display the booking details
             document.querySelector(
               ".modal-title"
-            ).innerHTML = `${clientName} | ${bookingDetails.date}`;
+            ).innerHTML = `Booking Details`;
             document.querySelector(
               ".modal-body"
-            ).innerHTML = `${bookingDetails.purpose}`;
+            ).innerHTML = `<h5>${clientName}</h5>
+            <p>Scheduled Date: ${booking.date}/p>
+            <p>Scheduled Time: ${booking.time}</p>
+            <p>Booking Purpose: ${booking.purpose}</p>`;
 
             acceptButton.dataset.bookingId = booking.id;
             rejectButton.dataset.bookingId = booking.id;
@@ -154,6 +157,9 @@ async function getClientNameById(clientId) {
 
 // Function to update the booking status
 async function updateBookingStatus(bookingId, newStatus) {
+  var toastEl = document.getElementById("liveToast");
+  var toast = new bootstrap.Toast(toastEl);
+
   try {
     const response = await fetch(
       backendURL + `/api/booking/status/${bookingId}`,
@@ -168,9 +174,17 @@ async function updateBookingStatus(bookingId, newStatus) {
 
     if (response.ok) {
       console.log(`Booking status updated to: ${newStatus}`);
+      toastEl.querySelector(
+        ".toast-body"
+      ).textContent = `Booking Status: ${newStatus}`;
+      toast.show();
     } else {
       const json = await response.json();
       console.error("Error updating booking status:", json);
+      toastEl.querySelector(
+        ".toast-body"
+      ).textContent = `Error updating booking status: ${json.message}`;
+      toast.show();
     }
   } catch (error) {
     console.error("Error updating booking status:", error);
