@@ -10,6 +10,7 @@ async function getBookingsLists() {
     method: "GET",
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });
@@ -73,7 +74,7 @@ async function getBookingsLists() {
             document.querySelector(
               ".modal-body"
             ).innerHTML = `<h5>${clientName}</h5>
-            <p>Scheduled Date: ${booking.date}/p>
+            <p>Scheduled Date: ${booking.date}</p>
             <p>Scheduled Time: ${booking.time}</p>
             <p>Booking Purpose: ${booking.purpose}</p>`;
 
@@ -119,6 +120,7 @@ async function getBookingDetailsById(bookingId) {
     method: "GET",
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
@@ -135,6 +137,7 @@ async function getClientNameById(clientId) {
   const clientResponse = await fetch(backendURL + `/api/clients/${clientId}`, {
     method: "GET",
     headers: {
+      "ngrok-skip-browser-warning": "69420",
       Accept: "application/json",
     },
   });
@@ -167,6 +170,7 @@ async function updateBookingStatus(bookingId, newStatus) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
         },
         body: JSON.stringify({ status: newStatus }),
       }

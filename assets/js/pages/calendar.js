@@ -6,6 +6,7 @@ async function displayCalendarEvents() {
     method: "GET",
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
     },
   });
 

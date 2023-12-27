@@ -14,6 +14,7 @@ btn_logout.onclick = async () => {
   const response = await fetch(backendURL + "/api/logout", {
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });

@@ -3,7 +3,7 @@ import { setRouter } from "../router/router.js";
 // Set Router
 setRouter();
 
-const backendURL = "http://hiraya-audi-booking-backend.test";
+const backendURL = "https://hiraya-audi-booking-backend.test";
 
 // Get Logged User Credentials
 async function getLoggedUser() {
@@ -11,6 +11,7 @@ async function getLoggedUser() {
   const response = await fetch(backendURL + "/api/profile", {
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });
@@ -64,6 +65,7 @@ async function getUserDetails() {
   const response = await fetch(backendURL + "/api/user/details", {
     headers: {
       Accept: "application/json",
+      "ngrok-skip-browser-warning": "69420",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });
@@ -95,6 +97,7 @@ async function updateUserDetails(userDetails) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "69420",
     },
     body: JSON.stringify(userDetails),
   });

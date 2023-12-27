@@ -11,6 +11,7 @@ function setRouter() {
     case "/admin-stats.html":
     case "/admin-accsettings.html":
     case "/admin-calendar":
+    case "/admin-bookings.html":
       if (!localStorage.getItem("token")) {
         window.location.pathname = "/admin-login.html";
       }
