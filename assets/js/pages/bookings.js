@@ -19,9 +19,9 @@ async function getBookingsLists() {
     const json = await response.json();
     console.log(json);
 
-    // Fetch all client names asynchronously
-    const clientNamePromises = json.map((booking) =>
-      getClientNameById(booking.client_id)
+    // Fetch all clients names asynchronously
+    const clientPromises = json.map((booking) =>
+      getClientById(booking.client_id)
     );
 
     // Counters for pending, accepted, and rejected bookings
@@ -29,48 +29,116 @@ async function getBookingsLists() {
     let acceptedCount = 0;
     let rejectedCount = 0;
 
-    // Wait for all client name promises to resolve
-    const clientNames = await Promise.all(clientNamePromises);
+    // Wait for all clients name promises to resolve
+    const clients = await Promise.all(clientPromises);
+
+    console.log(clients);
 
     json.forEach((booking, index) => {
       // Get the clients frist and last name
-      const clientName = clientNames[index];
+      const client = clients[index];
 
       let bookingDiv = document.createElement("div");
       bookingDiv.className =
         "list-group-item d-flex justify-content-between align-items-center my-3";
       bookingDiv.innerHTML = `<div class="ms-2 me-auto">
-        <div class="fw-bold">${getWeekday(booking.date)} | ${
-        booking.date
-      } | ${clientName} </div>
-        ${booking.purpose}
+        <div class="fw-bold"> ${client.first_name} ${client.last_name}</div>
+         ${getWeekday(booking.date)} | ${booking.date}
         </div>
-        <a
-          class="btn btn-primary d-flex align-items-center justify-content-center"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
-          id="view_booking_${booking.id}">
-          Review  <i class="bi bi-eye-fill ms-2"></i> 
-        </a>`;
+        ${
+          booking.status == "pending"
+            ? `<a
+        class="btn btn-primary d-flex align-items-center justify-content-center"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        id="review_booking_${booking.id}">
+        Review  <i class="bi bi-pen-fill ms-2"></i> 
+        </a>`
+            : `<a
+              class="btn btn-outline-success d-flex align-items-center justify-content-center"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              id="view_booking_${booking.id}">
+              View  <i class="bi bi-eye-fill ms-2"></i> 
+            </a>`
+        }`;
 
       if (booking.status === "pending") {
         document.getElementById("pending-tab-pane").appendChild(bookingDiv);
+
         pendingCount++;
       } else if (booking.status === "accepted") {
         document.getElementById("accepted-tab-pane").appendChild(bookingDiv);
+
         acceptedCount++;
       } else if (booking.status === "rejected") {
         document.getElementById("rejected-tab-pane").appendChild(bookingDiv);
+
         rejectedCount++;
       }
 
       // Add click event listener for each booking
+      const reviewBookingAnchor = bookingDiv.querySelector(
+        `#review_booking_${booking.id}`
+      );
+
       const viewBookingAnchor = bookingDiv.querySelector(
         `#view_booking_${booking.id}`
       );
 
-      if (viewBookingAnchor) {
+      if (reviewBookingAnchor) {
+        reviewBookingAnchor.addEventListener("click", async () => {
+          try {
+            const bookingDetails = await getBookingDetailsById(booking.id);
+            console.log("Booking Details:", bookingDetails);
+
+            // Update the UI to display the booking details
+            document.querySelector(
+              ".modal-title"
+            ).innerHTML = `Booking Details`;
+            document.querySelector(
+              ".modal-body"
+            ).innerHTML = `<h5 class="d-flex justify-content-between align-content-center">${
+              client.first_name
+            } ${client.last_name} 
+            <span class="badge bg-primary">${
+              client.affiliation_id == 1 || client.affiliation_id == 2
+                ? `CSU Affiliated`
+                : `Non-CSU Affiliated`
+            }</span></h5>
+            <div class="mt-4">
+              <strong>Date</strong>
+              <p>${booking.date} ${booking.time}</p>
+            </div>
+            <div class="mt-4">
+            <strong>Purpose of Reservation</strong>
+            <p>${booking.purpose}</p>
+            </div>
+            <div class="mt-4">
+            <strong>Affiliation</strong>
+            <p>${
+              client.affiliation_id == 1
+                ? "Student from Caraga State University"
+                : client.affiliation_id == 3
+                ? "Employee from Caraga State University"
+                : "Non-CSU Affiliated"
+            }</p>
+            </div>
+            `;
+
+            document.querySelector(".modal-footer").innerHTML = `
+              <button type="button" class="btn btn-outline-success" id="acceptButton" name="accept">Accept</button>
+              <button type="button" class="btn btn-outline-danger" id="rejectButton" name="reject">Reject</button>`;
+
+            acceptButton.dataset.bookingId = booking.id;
+            rejectButton.dataset.bookingId = booking.id;
+          } catch (error) {
+            console.error("Error fetching booking details:", error);
+          }
+        });
+      } else if (viewBookingAnchor) {
         viewBookingAnchor.addEventListener("click", async () => {
           try {
             const bookingDetails = await getBookingDetailsById(booking.id);
@@ -82,15 +150,40 @@ async function getBookingsLists() {
             ).innerHTML = `Booking Details`;
             document.querySelector(
               ".modal-body"
-            ).innerHTML = `<h5>${clientName}</h5>
-            <p>Scheduled Date: ${booking.date}</p>
-            <p>Scheduled Time: ${booking.time}</p>
-            <p>Booking Purpose: ${booking.purpose}</p>`;
+            ).innerHTML = `<h5 class="d-flex justify-content-between align-content-center">${
+              client.first_name
+            } ${client.last_name} 
+            <span class="badge bg-primary">${
+              client.affiliation_id == 1 || client.affiliation_id == 3
+                ? `CSU Affiliated`
+                : `Non-CSU Affiliated`
+            }</span></h5>
+            <div class="mt-4">
+              <strong>Date</strong>
+              <p>${booking.date} ${booking.time}</p>
+            </div>
+            <div class="mt-4">
+            <strong>Purpose of Reservation</strong>
+            <p>${booking.purpose}</p>
+            </div>
+            <div class="mt-4">
+            <strong>Affiliation</strong>
+            <p>${
+              client.affiliation_id == 1
+                ? "Student from Caraga State University"
+                : client.affiliation_id == 3
+                ? "Employee from Caraga State University"
+                : "Non-CSU Affiliated"
+            }</p>
+            </div>
+            `;
 
-            acceptButton.dataset.bookingId = booking.id;
-            rejectButton.dataset.bookingId = booking.id;
+            document.querySelector(".modal-footer").innerHTML = `
+              <button type="button" class="btn btn-outline-danger" id="deleteButton" name="delete">Delete</button>`;
+
+            deleteButton.dataset.bookingId = booking.id;
           } catch (error) {
-            console.error("Error fetching booking details:", error);
+            console.error("Error deleting booking:", error);
           }
         });
       }
@@ -147,7 +240,7 @@ async function getBookingDetailsById(bookingId) {
 }
 
 // Get Client Name
-async function getClientNameById(clientId) {
+async function getClientById(clientId) {
   const clientResponse = await fetch(backendURL + `/api/clients/${clientId}`, {
     method: "GET",
     headers: {
@@ -159,15 +252,15 @@ async function getClientNameById(clientId) {
   if (clientResponse.ok) {
     const clientJson = await clientResponse.json();
 
-    const first_name = clientJson.first_name;
-    const last_name = clientJson.last_name;
-    const name = first_name.concat(" ", last_name);
+    // const first_name = clientJson.first_name;
+    // const last_name = clientJson.last_name;
+    // const name = first_name.concat(" ", last_name);
 
     console.log(clientJson);
 
-    return name;
+    return clientJson;
   } else {
-    console.error("Failed to fetch client details");
+    console.error("Failed to fetch clients details");
     return "Unknown Client";
   }
 }
@@ -217,33 +310,47 @@ acceptButton.addEventListener("click", async function () {
   // Get the booking ID from the data attribute
   console.log("Accept button clicked");
 
-  const bookingId = acceptButton.dataset.bookingId;
+  // const bookingId = acceptButton.dataset.bookingId;
 
-  if (bookingId) {
-    // Update the booking status to 'accepted'
-    await updateBookingStatus(bookingId, "accepted");
+  // if (bookingId) {
+  //   // Update the booking status to 'accepted'
+  //   await updateBookingStatus(bookingId, "accepted");
 
-    // Close the modal if needed
-    $("#staticBackdrop").modal("hide");
-  } else {
-    console.error("Booking ID not found.");
-  }
+  //   // Close the modal if needed
+  //   $("#staticBackdrop").modal("hide");
+  // } else {
+  //   console.error("Booking ID not found.");
+  // }
 });
 
 rejectButton.addEventListener("click", async function () {
   // Get the booking ID from the data attribute
   console.log("Reject button clicked");
-  const bookingId = rejectButton.dataset.bookingId;
+  // const bookingId = rejectButton.dataset.bookingId;
 
-  if (bookingId) {
-    // Update the booking status to 'reject'
-    await updateBookingStatus(bookingId, "rejected");
+  // if (bookingId) {
+  //   // Update the booking status to 'reject'
+  //   await updateBookingStatus(bookingId, "rejected");
 
-    // Close the modal if needed
-    $("#staticBackdrop").modal("hide");
+  //   // Close the modal if needed
+  //   $("#staticBackdrop").modal("hide");
+  // } else {
+  //   console.error("Booking ID not found.");
+  // }
+});
 
-    // reloads data
-  } else {
-    console.error("Booking ID not found.");
-  }
+deleteButton.addEventListener("click", async function () {
+  // Get the booking ID from the data attribute
+  console.log("delete button clicked");
+  // const bookingId = deleteButton.dataset.bookingId;
+
+  // if (bookingId) {
+  //   // Update the booking status to 'reject'
+  //   await updateBookingStatus(bookingId, "rejected");
+
+  //   // Close the modal if needed
+  //   $("#staticBackdrop").modal("hide");
+  // } else {
+  //   console.error("Booking ID not found.");
+  // }
 });

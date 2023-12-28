@@ -212,21 +212,21 @@
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#accepted-tab-pane" type="button" role="tab" aria-controls="accepted-tab-pane" aria-selected="false">
               Accepted
-              <span class="badge bg-primary rounded-pill ms-2" id="accepted-badge">0</span>
+              <span class="badge bg-success rounded-pill ms-2" id="accepted-badge">0</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rejected-tab-pane" type="button" role="tab" aria-controls="rejected-tab-pane" aria-selected="false">
               Rejected
-              <span class="badge bg-primary rounded-pill ms-2" id="rejected-badge">0</span>
+              <span class="badge bg-danger rounded-pill ms-2" id="rejected-badge">0</span>
             </button>
           </li>
           
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="pending-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
-          <div class="tab-pane fade" id="accepted-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"></div>
-          <div class="tab-pane fade" id="rejected-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"></div>
+          <div class="tab-pane fade show active" id="pending-tab-pane" role="tabpanel" aria-labelledby="pending-tab" tabindex="0"></div>
+          <div class="tab-pane fade" id="accepted-tab-pane" role="tabpanel" aria-labelledby="accepted-tab" tabindex="0"></div>
+          <div class="tab-pane fade" id="rejected-tab-pane" role="tabpanel" aria-labelledby="rejected-tab" tabindex="0"></div>
         </div>
 
         
@@ -246,9 +246,9 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              <h5 class="modal-title fs-5 " id="staticBackdropLabel">
                 
-              </h1>
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -257,9 +257,8 @@
               ></button>
             </div>
             <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" id="acceptButton" name="accept">Accept</button>
-                <button type="button" class="btn btn-outline-danger" id="rejectButton" name="reject">Reject</button>
+            <div class="modal-footer d-flex align-content-center justify-content-center">
+                
             </div>
           </div>
         </div>

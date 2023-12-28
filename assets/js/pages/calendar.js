@@ -57,3 +57,34 @@ function displayEvent(event) {
   // This function can vary depending on the calendar library or API you are using
   console.log(event);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  var calendarEl = document.getElementById("calendar");
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    timeZone: "UTC",
+    themeSystem: "bootstrap",
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+    },
+    dateClick: function (dateClickInfo) {
+      createEvent(dateClickInfo.dateStr, "Some event", undefined);
+    },
+    select: function (selectionInfo) {
+      createEvent(selectionInfo.startStr, "Some event", selectionInfo.endStr);
+    },
+  });
+  calendar.render();
+});
+
+// Event creation function
+const events = [];
+function createEvent(id, startDate, title) {
+  const event = {
+    id: id, // You must use a custom id generator
+    title: title,
+    start: startDate,
+  };
+  events.push(event);
+}
