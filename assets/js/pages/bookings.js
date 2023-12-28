@@ -24,6 +24,11 @@ async function getBookingsLists() {
       getClientNameById(booking.client_id)
     );
 
+    // Counters for pending, accepted, and rejected bookings
+    let pendingCount = 0;
+    let acceptedCount = 0;
+    let rejectedCount = 0;
+
     // Wait for all client name promises to resolve
     const clientNames = await Promise.all(clientNamePromises);
 
@@ -41,19 +46,23 @@ async function getBookingsLists() {
         ${booking.purpose}
         </div>
         <a
+          class="btn btn-primary d-flex align-items-center justify-content-center"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
           id="view_booking_${booking.id}">
-          <i class="bi bi-eye-fill"></i>
+          Review  <i class="bi bi-eye-fill ms-2"></i> 
         </a>`;
 
       if (booking.status === "pending") {
         document.getElementById("pending-tab-pane").appendChild(bookingDiv);
+        pendingCount++;
       } else if (booking.status === "accepted") {
         document.getElementById("accepted-tab-pane").appendChild(bookingDiv);
+        acceptedCount++;
       } else if (booking.status === "rejected") {
         document.getElementById("rejected-tab-pane").appendChild(bookingDiv);
+        rejectedCount++;
       }
 
       // Add click event listener for each booking
@@ -86,6 +95,11 @@ async function getBookingsLists() {
         });
       }
     });
+
+    // Update the badge counters in the UI
+    document.getElementById("pending-badge").innerHTML = pendingCount;
+    document.getElementById("accepted-badge").innerHTML = acceptedCount;
+    document.getElementById("rejected-badge").innerHTML = rejectedCount;
   } else {
     const json = await response.json();
     console.log(json);
@@ -178,10 +192,14 @@ async function updateBookingStatus(bookingId, newStatus) {
 
     if (response.ok) {
       console.log(`Booking status updated to: ${newStatus}`);
+
       toastEl.querySelector(
         ".toast-body"
       ).textContent = `Booking Status: ${newStatus}`;
       toast.show();
+
+      // Reload the page
+      getBookingsLists();
     } else {
       const json = await response.json();
       console.error("Error updating booking status:", json);
@@ -198,6 +216,7 @@ async function updateBookingStatus(bookingId, newStatus) {
 acceptButton.addEventListener("click", async function () {
   // Get the booking ID from the data attribute
   console.log("Accept button clicked");
+
   const bookingId = acceptButton.dataset.bookingId;
 
   if (bookingId) {
@@ -222,6 +241,8 @@ rejectButton.addEventListener("click", async function () {
 
     // Close the modal if needed
     $("#staticBackdrop").modal("hide");
+
+    // reloads data
   } else {
     console.error("Booking ID not found.");
   }

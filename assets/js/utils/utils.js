@@ -3,7 +3,7 @@ import { setRouter } from "../router/router.js";
 // Set Router
 setRouter();
 
-const backendURL = "https://eedb-103-80-142-206.ngrok-free.app";
+const backendURL = "http://hiraya-audi-booking-backend.test";
 
 // Get Logged User Credentials
 async function getLoggedUser() {
@@ -20,7 +20,6 @@ async function getLoggedUser() {
   if (response.ok) {
     const json = await response.json();
     var userrole = "no";
-    console.log(json);
 
     if (json.is_admin == "yes") {
       userrole = "Admin";
@@ -72,7 +71,6 @@ async function getUserDetails() {
 
   if (response.ok) {
     const json = await response.json();
-    console.log(json);
 
     document.getElementById("about").innerHTML = json.about;
     document.getElementById("company").innerHTML = json.company;
