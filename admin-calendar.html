@@ -33,7 +33,10 @@
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
+    <!-- FullCalendar -->
     <script src="assets/vendor/fullcalendar-6.1.10/dist/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js"></script>
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style1.css" rel="stylesheet" />
@@ -200,6 +203,55 @@
       <section class="section calendar">
         <div id="calendar"></div>
       </section>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="eventModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title fs-5 d-flex" id="modalTitle">
+                <div id="clientName"></div>
+                <div id="clientBadge" class="me-auto"></div>
+              </h3>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="closeModalBtn"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <strong>Schedule</strong>
+                <p>
+                  Date: <span id="modalDate"></span>
+                  <span id="modalTime"></span>
+                </p>
+              </div>
+              <div class="mb-3">
+                <strong>Purpose of Reservation</strong>
+                <p>
+                  <span id="modalPurpose"></span>
+                </p>
+              </div>
+              <div class="mb-3">
+                <strong>Affiliation</strong>
+                <p>
+                  <span id="modalAffiliation"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
 
       <!-- ======= Footer ======= -->
       <footer>

@@ -148,16 +148,15 @@ async function getBookingsLists() {
             document.querySelector(
               ".modal-title"
             ).innerHTML = `Booking Details`;
-            document.querySelector(
-              ".modal-body"
-            ).innerHTML = `<h5 class="d-flex justify-content-between align-content-center">${
-              client.first_name
-            } ${client.last_name} 
-            <span class="badge bg-primary">${
-              client.affiliation_id == 1 || client.affiliation_id == 3
-                ? `CSU Affiliated`
-                : `Non-CSU Affiliated`
-            }</span></h5>
+            document.querySelector(".modal-body").innerHTML = `
+            <h5 class="d-flex justify-content-between align-content-center">
+              ${client.first_name} ${client.last_name} 
+              <span class="badge bg-primary">${
+                client.affiliation_id == 1 || client.affiliation_id == 3
+                  ? `CSU Affiliated`
+                  : `Non-CSU Affiliated`
+              }</span>
+            </h5>
             <div class="mt-4">
               <strong>Date</strong>
               <p>${booking.date} ${booking.time}</p>
@@ -251,10 +250,6 @@ async function getClientById(clientId) {
 
   if (clientResponse.ok) {
     const clientJson = await clientResponse.json();
-
-    // const first_name = clientJson.first_name;
-    // const last_name = clientJson.last_name;
-    // const name = first_name.concat(" ", last_name);
 
     console.log(clientJson);
 
