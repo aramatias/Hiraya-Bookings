@@ -29,29 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
   calendar.render();
 });
 
-// function createEventModal(event) {
-//   // Create a modal
-//   var modal = new tingle.modal({
-//     footer: true,
-//     stickyFooter: false,
-//     closeMethods: ["overlay", "button", "escape"],
-//     closeLabel: "Close",
-//   });
-
-//   // Set content for the modal
-//   modal.setContent(
-//     "<h3>" +
-//       event.title +
-//       "</h3><p>Date: " +
-//       event.start.toLocaleDateString() +
-//       "</p><p>Purpose: " +
-//       event.extendedProps.purpose +
-//       "</p>"
-//   );
-
-//   return modal;
-// }
-
 async function showEventModal(event) {
   console.log("you are in showEventModal");
   // Get the modal

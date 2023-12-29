@@ -1,5 +1,7 @@
 import { backendURL } from "../utils/utils.js";
 
+const acceptButtonID = 0;
+
 /**
  * Retrieves the list of bookings from the backend API.
  *
@@ -17,7 +19,6 @@ async function getBookingsLists() {
 
   if (response.ok) {
     const json = await response.json();
-    console.log(json);
 
     // Fetch all clients names asynchronously
     const clientPromises = json.map((booking) =>
@@ -31,8 +32,6 @@ async function getBookingsLists() {
 
     // Wait for all clients name promises to resolve
     const clients = await Promise.all(clientPromises);
-
-    console.log(clients);
 
     json.forEach((booking, index) => {
       // Get the clients frist and last name
@@ -92,7 +91,6 @@ async function getBookingsLists() {
         reviewBookingAnchor.addEventListener("click", async () => {
           try {
             const bookingDetails = await getBookingDetailsById(booking.id);
-            console.log("Booking Details:", bookingDetails);
 
             // Update the UI to display the booking details
             document.querySelector(
@@ -142,7 +140,6 @@ async function getBookingsLists() {
         viewBookingAnchor.addEventListener("click", async () => {
           try {
             const bookingDetails = await getBookingDetailsById(booking.id);
-            console.log("Booking Details:", bookingDetails);
 
             // Update the UI to display the booking details
             document.querySelector(
@@ -250,9 +247,6 @@ async function getClientById(clientId) {
 
   if (clientResponse.ok) {
     const clientJson = await clientResponse.json();
-
-    console.log(clientJson);
-
     return clientJson;
   } else {
     console.error("Failed to fetch clients details");
@@ -279,15 +273,10 @@ async function updateBookingStatus(bookingId, newStatus) {
     );
 
     if (response.ok) {
-      console.log(`Booking status updated to: ${newStatus}`);
-
       toastEl.querySelector(
         ".toast-body"
       ).textContent = `Booking Status: ${newStatus}`;
       toast.show();
-
-      // Reload the page
-      getBookingsLists();
     } else {
       const json = await response.json();
       console.error("Error updating booking status:", json);
@@ -301,51 +290,79 @@ async function updateBookingStatus(bookingId, newStatus) {
   }
 }
 
-acceptButton.addEventListener("click", async function () {
-  // Get the booking ID from the data attribute
-  console.log("Accept button clicked");
+async function deleteBooking(bookingId) {
+  var toastEl = document.getElementById("liveToast");
+  var toast = new bootstrap.Toast(toastEl);
 
-  // const bookingId = acceptButton.dataset.bookingId;
+  try {
+    const response = await fetch(backendURL + `/api/booking/${bookingId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "69420",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
-  // if (bookingId) {
-  //   // Update the booking status to 'accepted'
-  //   await updateBookingStatus(bookingId, "accepted");
+    if (response.ok) {
+      toastEl.querySelector(
+        ".toast-body"
+      ).textContent = `Booking ${bookingId} deleted successfully`;
+      toast.show();
+    } else {
+      const json = await response.json();
+      console.error("Error deleting booking:", json);
+      toastEl.querySelector(
+        ".toast-body"
+      ).textContent = `Error deleting booking: ${json.message}`;
+      toast.show();
+    }
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+  }
+}
 
-  //   // Close the modal if needed
-  //   $("#staticBackdrop").modal("hide");
-  // } else {
-  //   console.error("Booking ID not found.");
-  // }
+document.addEventListener("click", function (event) {
+  if (event.target.id === "acceptButton") {
+    event.preventDefault();
+    const bookingId = event.target.dataset.bookingId;
+
+    console.log("Accept button clicked", bookingId);
+    if (bookingId) {
+      // Update the booking status to 'accepted'
+      updateBookingStatus(bookingId, "accepted");
+    } else {
+      console.error("Booking ID not found.");
+    }
+  }
 });
 
-rejectButton.addEventListener("click", async function () {
-  // Get the booking ID from the data attribute
-  console.log("Reject button clicked");
-  // const bookingId = rejectButton.dataset.bookingId;
+document.addEventListener("click", function (event) {
+  if (event.target.id === "rejectButton") {
+    event.preventDefault();
+    const bookingId = event.target.dataset.bookingId;
 
-  // if (bookingId) {
-  //   // Update the booking status to 'reject'
-  //   await updateBookingStatus(bookingId, "rejected");
-
-  //   // Close the modal if needed
-  //   $("#staticBackdrop").modal("hide");
-  // } else {
-  //   console.error("Booking ID not found.");
-  // }
+    console.log("Reject button clicked", bookingId);
+    if (bookingId) {
+      // Update the booking status to 'rejected'
+      updateBookingStatus(bookingId, "rejected");
+    } else {
+      console.error("Booking ID not found.");
+    }
+  }
 });
 
-deleteButton.addEventListener("click", async function () {
-  // Get the booking ID from the data attribute
-  console.log("delete button clicked");
-  // const bookingId = deleteButton.dataset.bookingId;
+document.addEventListener("click", function (event) {
+  if (event.target.id === "deleteButton") {
+    event.preventDefault();
+    const bookingId = event.target.dataset.bookingId;
 
-  // if (bookingId) {
-  //   // Update the booking status to 'reject'
-  //   await updateBookingStatus(bookingId, "rejected");
-
-  //   // Close the modal if needed
-  //   $("#staticBackdrop").modal("hide");
-  // } else {
-  //   console.error("Booking ID not found.");
-  // }
+    console.log("Delete button clicked", bookingId);
+    if (bookingId) {
+      // Delete the booking
+      deleteBooking(bookingId);
+    } else {
+      console.error("Booking ID not found.");
+    }
+  }
 });

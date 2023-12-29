@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+.text-bg-primary {
+  background-color: #e57226 !important;
+}
+
 p {
   color: #7b685d;
   text-decoration: none;
