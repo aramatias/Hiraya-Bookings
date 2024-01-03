@@ -3,7 +3,9 @@ import { setRouter } from "../router/router.js";
 // Set Router
 setRouter();
 
-const backendURL = "https://eedb-103-80-142-206.ngrok-free.app";
+const backendURL = "http://hiraya-audi-booking-backend.test";
+
+var loggedUserID = 0;
 
 // Get Logged User Credentials
 async function getLoggedUser() {
@@ -20,13 +22,14 @@ async function getLoggedUser() {
   if (response.ok) {
     const json = await response.json();
     var userrole = "no";
-    console.log(json);
 
     if (json.is_admin == "yes") {
       userrole = "Admin";
     } else {
       userrole = "User";
     }
+
+    loggedUserID = json.id;
 
     document.getElementById("user_email").innerHTML = json.email;
     document.getElementById("user_role").innerHTML = userrole;
@@ -59,33 +62,6 @@ async function getLoggedUser() {
   }
 }
 
-// Get User Details
-async function getUserDetails() {
-  // Access User Creds API Endpoint
-  const response = await fetch(backendURL + "/api/user/details", {
-    headers: {
-      Accept: "application/json",
-      "ngrok-skip-browser-warning": "69420",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  });
-
-  if (response.ok) {
-    const json = await response.json();
-    console.log(json);
-
-    document.getElementById("about").innerHTML = json.about;
-    document.getElementById("company").innerHTML = json.company;
-    document.getElementById("job").innerHTML = json.job;
-    document.getElementById("country").innerHTML = json.country;
-    document.getElementById("address").innerHTML = json.address;
-    document.getElementById("phone").innerHTML = json.phone;
-  } else {
-    const json = await response.json();
-    console.log(json);
-  }
-}
-
 /**
  * Updates the details of the logged-in user.
  *
@@ -109,4 +85,4 @@ async function updateUserDetails(userDetails) {
   throw new Error("Failed to update user details.");
 }
 
-export { backendURL, getLoggedUser, getUserDetails };
+export { backendURL, getLoggedUser, loggedUserID };

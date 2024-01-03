@@ -33,7 +33,10 @@
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
+    <!-- FullCalendar -->
     <script src="assets/vendor/fullcalendar-6.1.10/dist/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js"></script>
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style1.css" rel="stylesheet" />
@@ -43,7 +46,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center toggle-sidebar-btn">
           <img src="assets/img/hiraya.png" alt="" />
         </a>
       </div>
@@ -201,6 +204,55 @@
         <div id="calendar"></div>
       </section>
 
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="eventModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title fs-5 d-flex" id="modalTitle">
+                <div id="clientName" class="me-5"></div>
+                <div id="clientBadge" class="ms-5"></div>
+              </h3>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="closeModalBtn"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <strong>Schedule</strong>
+                <p>
+                  Date: <span id="modalDate"></span>
+                  <span id="modalTime"></span>
+                </p>
+              </div>
+              <div class="mb-3">
+                <strong>Purpose of Reservation</strong>
+                <p>
+                  <span id="modalPurpose"></span>
+                </p>
+              </div>
+              <div class="mb-3">
+                <strong>Affiliation</strong>
+                <p>
+                  <span id="modalAffiliation"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
       <!-- ======= Footer ======= -->
       <footer>
         <hr />
@@ -234,43 +286,5 @@
     <!-- Template Main JS File -->
     <script type="module" src="assets/js/admin.js"></script>
     <script type="module" src="assets/js/pages/calendar.js"></script>
-
-    <!-- Calendar Script  -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          timeZone: "UTC",
-          themeSystem: "bootstrap",
-          headerToolbar: {
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
-          },
-          dateClick: function (dateClickInfo) {
-            createEvent(dateClickInfo.dateStr, "Some event", undefined);
-          },
-          select: function (selectionInfo) {
-            createEvent(
-              selectionInfo.startStr,
-              "Some event",
-              selectionInfo.endStr
-            );
-          },
-        });
-        calendar.render();
-      });
-
-      // Event creation function
-      const events = [];
-      function createEvent(id, startDate, title) {
-        const event = {
-          id: id, // You must use a custom id generator
-          title: title,
-          start: startDate,
-        };
-        events.push(event);
-      }
-    </script>
   </body>
 </html>
