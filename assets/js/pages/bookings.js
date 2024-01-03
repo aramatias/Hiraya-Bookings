@@ -8,7 +8,7 @@ const acceptButtonID = 0;
  * @return {Promise<void>} Returns a Promise that resolves once the bookings are retrieved.
  */
 async function getBookingsLists() {
-  const response = await fetch(backendURL + "/api/booking", {
+  const response = await fetch(backendURL + "/api/bookingdetails", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -20,28 +20,17 @@ async function getBookingsLists() {
   if (response.ok) {
     const json = await response.json();
 
-    // Fetch all clients names asynchronously
-    const clientPromises = json.map((booking) =>
-      getClientById(booking.client_id)
-    );
-
     // Counters for pending, accepted, and rejected bookings
     let pendingCount = 0;
     let acceptedCount = 0;
     let rejectedCount = 0;
 
-    // Wait for all clients name promises to resolve
-    const clients = await Promise.all(clientPromises);
-
-    json.forEach((booking, index) => {
-      // Get the clients frist and last name
-      const client = clients[index];
-
+    json.forEach((booking) => {
       let bookingDiv = document.createElement("div");
       bookingDiv.className =
         "list-group-item d-flex justify-content-between align-items-center my-3";
       bookingDiv.innerHTML = `<div class="ms-2 me-auto">
-        <div class="fw-bold"> ${client.first_name} ${client.last_name}</div>
+        <div class="fw-bold"> ${booking.first_name} ${booking.last_name}</div>
          ${getWeekday(booking.date)} | ${booking.date}
         </div>
         ${
@@ -51,7 +40,7 @@ async function getBookingsLists() {
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
-        id="review_booking_${booking.id}">
+        id="review_booking_${booking.booking_id}">
         Review  <i class="bi bi-pen-fill ms-2"></i> 
         </a>`
             : `<a
@@ -59,7 +48,7 @@ async function getBookingsLists() {
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
-              id="view_booking_${booking.id}">
+              id="view_booking_${booking.booking_id}">
               View  <i class="bi bi-eye-fill ms-2"></i> 
             </a>`
         }`;
@@ -80,18 +69,16 @@ async function getBookingsLists() {
 
       // Add click event listener for each booking
       const reviewBookingAnchor = bookingDiv.querySelector(
-        `#review_booking_${booking.id}`
+        `#review_booking_${booking.booking_id}`
       );
 
       const viewBookingAnchor = bookingDiv.querySelector(
-        `#view_booking_${booking.id}`
+        `#view_booking_${booking.booking_id}`
       );
 
       if (reviewBookingAnchor) {
         reviewBookingAnchor.addEventListener("click", async () => {
           try {
-            const bookingDetails = await getBookingDetailsById(booking.id);
-
             // Update the UI to display the booking details
             document.querySelector(
               ".modal-title"
@@ -99,10 +86,10 @@ async function getBookingsLists() {
             document.querySelector(
               ".modal-body"
             ).innerHTML = `<h5 class="d-flex justify-content-between align-content-center">${
-              client.first_name
-            } ${client.last_name} 
+              booking.first_name
+            } ${booking.last_name} 
             <span class="badge bg-primary">${
-              client.affiliation_id == 1 || client.affiliation_id == 2
+              booking.affiliation_id == 1 || booking.affiliation_id == 2
                 ? `CSU Affiliated`
                 : `Non-CSU Affiliated`
             }</span></h5>
@@ -117,9 +104,9 @@ async function getBookingsLists() {
             <div class="mt-4">
             <strong>Affiliation</strong>
             <p>${
-              client.affiliation_id == 1
+              booking.affiliation_id == 1
                 ? "Student from Caraga State University"
-                : client.affiliation_id == 3
+                : booking.affiliation_id == 3
                 ? "Employee from Caraga State University"
                 : "Non-CSU Affiliated"
             }</p>
@@ -130,8 +117,8 @@ async function getBookingsLists() {
               <button type="button" class="btn btn-outline-success" id="acceptButton" name="accept">Accept</button>
               <button type="button" class="btn btn-outline-danger" id="rejectButton" name="reject">Reject</button>`;
 
-            acceptButton.dataset.bookingId = booking.id;
-            rejectButton.dataset.bookingId = booking.id;
+            acceptButton.dataset.bookingId = booking.booking_id;
+            rejectButton.dataset.bookingId = booking.booking_id;
           } catch (error) {
             console.error("Error fetching booking details:", error);
           }
@@ -139,17 +126,15 @@ async function getBookingsLists() {
       } else if (viewBookingAnchor) {
         viewBookingAnchor.addEventListener("click", async () => {
           try {
-            const bookingDetails = await getBookingDetailsById(booking.id);
-
             // Update the UI to display the booking details
             document.querySelector(
               ".modal-title"
             ).innerHTML = `Booking Details`;
             document.querySelector(".modal-body").innerHTML = `
             <h5 class="d-flex justify-content-between align-content-center">
-              ${client.first_name} ${client.last_name} 
+              ${booking.first_name} ${booking.last_name} 
               <span class="badge bg-primary">${
-                client.affiliation_id == 1 || client.affiliation_id == 3
+                booking.affiliation_id == 1 || booking.affiliation_id == 3
                   ? `CSU Affiliated`
                   : `Non-CSU Affiliated`
               }</span>
@@ -165,9 +150,9 @@ async function getBookingsLists() {
             <div class="mt-4">
             <strong>Affiliation</strong>
             <p>${
-              client.affiliation_id == 1
+              booking.affiliation_id == 1
                 ? "Student from Caraga State University"
-                : client.affiliation_id == 3
+                : booking.affiliation_id == 3
                 ? "Employee from Caraga State University"
                 : "Non-CSU Affiliated"
             }</p>
@@ -177,7 +162,7 @@ async function getBookingsLists() {
             document.querySelector(".modal-footer").innerHTML = `
               <button type="button" class="btn btn-outline-danger" id="deleteButton" name="delete">Delete</button>`;
 
-            deleteButton.dataset.bookingId = booking.id;
+            deleteButton.dataset.bookingId = booking.booking_id;
           } catch (error) {
             console.error("Error deleting booking:", error);
           }
@@ -211,47 +196,6 @@ function getWeekday(dateString) {
   const date = new Date(dateString);
   const dayName = days[date.getDay()];
   return dayName;
-}
-
-/**
- * Displays the booking details as a modal.
- *
- * @param {Object} booking - The booking object containing the details.
- */
-async function getBookingDetailsById(bookingId) {
-  const response = await fetch(`${backendURL}/api/booking/${bookingId}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "ngrok-skip-browser-warning": "69420",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch booking details");
-  }
-
-  return response.json();
-}
-
-// Get Client Name
-async function getClientById(clientId) {
-  const clientResponse = await fetch(backendURL + `/api/clients/${clientId}`, {
-    method: "GET",
-    headers: {
-      "ngrok-skip-browser-warning": "69420",
-      Accept: "application/json",
-    },
-  });
-
-  if (clientResponse.ok) {
-    const clientJson = await clientResponse.json();
-    return clientJson;
-  } else {
-    console.error("Failed to fetch clients details");
-    return "Unknown Client";
-  }
 }
 
 // Function to update the booking status

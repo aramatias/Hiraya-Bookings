@@ -74,3 +74,47 @@ async function displayUpcomingBookings() {
 }
 
 displayUpcomingBookings();
+
+/**
+ * Fetches news and updates from the News API and displays them on the webpage.
+ *
+ * @return {Promise<void>} The function does not return anything.
+ */
+async function displayNewsandUpdates() {
+  const response = await fetch(
+    "https://newsapi.org/v2/top-headlines?country=ph&apiKey=7f0694a35e24490b8f0444c320b0fba8",
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+      Params: {
+        country: "ph",
+        apiKey: "7f0694a35e24490b8f0444c320b0fba8",
+      },
+    }
+  );
+
+  if (response.ok) {
+    const json = await response.json();
+    console.log(json);
+
+    for (let i = 0; i < json.articles.length; i++) {
+      const article = json.articles[i];
+
+      let news = document.createElement("div");
+      news.className = "post-item clearfix";
+      news.innerHTML = `<img src="${article.urlToImage}" alt="" />
+      <h6><a href="#">${article.title}</a></h6>
+      <p>
+        ${article.description}
+      </p>`;
+
+      document.getElementById("news").appendChild(news);
+      console.log(article);
+    }
+  } else {
+    const json = await response.json();
+    console.log(json);
+  }
+}
